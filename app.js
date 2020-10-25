@@ -21,7 +21,7 @@ function setPosition(e) {
 function draw(e) {
   if (e.buttons !== 1) return; // if mouse is not clicked, do not go further
 
-  var color = document.getElementById("hex").value;
+  var color = document.getElementById("colorPicker").value;
 
   ctx.beginPath(); // begin the drawing path
 
@@ -44,3 +44,19 @@ window.addEventListener("resize", resize);
 document.addEventListener("mousemove", draw);
 document.addEventListener("mousedown", setPosition);
 document.addEventListener("mouseenter", setPosition);
+
+// add color picker functionality
+document.querySelectorAll('input[type=color]').forEacg(function(picker){
+    var targetLabel =
+	document.querySelector('label[for="' + picker.id + '"]'),
+    codeArea = document.createElement('span');
+
+  codeArea.innerHTML = picker.value;
+  targetLabel.appendChild(codeArea);
+
+  picker.addEventListener('change', function() {
+    codeArea.innerHTML = picker.value;
+    targetLabel.appendChild(codeArea);
+  });
+});
+
